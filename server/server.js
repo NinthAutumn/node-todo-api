@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 
-
+const port = process.env.PORT || 3000;
 var {
   mongoose
 } = require('./db/mongoose');
@@ -35,9 +35,9 @@ app.get('/todos', (req, res) => {
     });
   }, (e) => {
     res.status(400).send(e);
-  })
-})
+  });
+});
 
-app.listen(3000, () => {
-  console.log("Started on port 3000");
+app.listen(port, () => {
+  console.log(`Started on port ${port}`);
 })
