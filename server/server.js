@@ -8,8 +8,6 @@ const _ = require('lodash');
 var {
   authenticate
 } = require('./middleware/authenticate');
-
-const port = process.env.PORT || 3000;
 var {
   mongoose
 } = require('./db/mongoose');
@@ -21,9 +19,13 @@ var {
   User
 } = require('./models/user');
 
+
 var app = express();
 
+
 app.use(bodyParser.json());
+const port = process.env.PORT || 5000;
+
 
 app.post('/todos', (req, res) => {
   var todo = new Todo({
@@ -46,9 +48,7 @@ app.get('/todos', (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Started on port ${port}`);
-});
+
 
 app.patch('/todos/:id', (req, res) => {
   var id = req.params.id;
@@ -93,3 +93,7 @@ app.post('/users', (req, res) => {
 app.get('/users/me', authenticate, (req, res) => {
   res.send(req.user);
 })
+
+app.listen(port, () => {
+  console.log(`Started on port ${port}`);
+});
