@@ -28,7 +28,7 @@ const port = process.env.PORT || 5000;
 
 
 app.post('/todos', (req, res) => {
-  var todo = new Todo({
+  todo = new Todo({
     text: req.body.text
   });
   todo.save().then((doc) => {
@@ -89,6 +89,11 @@ app.post('/users', (req, res) => {
     res.status(400).send(e);
   })
 });
+
+app.post('users/login', (req, res) => {
+  var body = _.pick(req.body, ['email', 'password']);
+  // res.send(body);
+})
 
 app.get('/users/me', authenticate, (req, res) => {
   res.send(req.user);
